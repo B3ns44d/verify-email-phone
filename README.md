@@ -2,6 +2,8 @@ a simple nodejs service to verify user phone number
 
 Usage:
 
+add env file: `cp .env.example .env`
+
 install dependencies: `yarn install`
 run server: `yarn dev`
 
@@ -45,3 +47,11 @@ example response:
 ```
 
 verify code: `curl -X POST -H "Content-Type: application/json" -d '{"phoneNumber":"+79161234567","verificationCode":"123456"}' http://localhost:3004/verify`
+
+Using Docker:
+
+add env file: `cp .env.example .env`
+
+build your image: `docker build -t verify-phone .`
+
+spin up your container: `docker run --env-file .env --name verify-phone -p 3004:3004 verify-phone:latest`
