@@ -1,0 +1,28 @@
+{
+  "name": "verify-phone-number",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./bin/www",
+    "test-all": "yarn format && yarn check-format && yarn check-lint",
+    "app-lint": "eslint --ext js",
+    "format": "prettier --write .",
+    "check-lint": "eslint . --ext js",
+    "check-format": "prettier --check ."
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "~4.17.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "eslint": "^7.29.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.4.1"
+  }
+}
