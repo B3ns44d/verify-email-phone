@@ -4,31 +4,29 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('tab-verify:server');
-var http = require('http');
+const app = require('../app')
+const debug = require('debug')('tab-verify:server')
+const http = require('http')
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3004');
-app.set('port', port);
+const port = normalizePort(process.env.PORT || '3009')
+app.set('port', port)
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+const server = http.createServer(app)
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
 app.listen(port, () => {
-  console.log(
-    `app running on port http://0.0.0.0:${port}`
-  )
+  console.log(`app running on port http://0.0.0.0:${port}`)
   console.log('Press Ctrl+C to quit.')
 })
 
