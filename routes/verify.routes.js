@@ -1,17 +1,22 @@
-const { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, VERIFICATION_SID } = process.env
+const {
+  TWILIO_AUTH_TOKEN,
+  TWILIO_ACCOUNT_SID,
+  PHONE_VERIFICATION_SID,
+} = require('../config/index.js')
+const { getServiceChannel, getServiceSid } = require('../utils/index.js')
 const express = require('express')
 const twilio = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
 const verifyRouter = express.Router()
 
 verifyRouter.get('/', async (req, res) => {
-  const { phoneNumber } = req.body
+  const { to, platform } = req.body
   let verificationRequest
 
   try {
     verificationRequest = await twilio.verify
-      .services(VERIFICATION_SID)
-      .verifications.create({ to: phoneNumber, channel: 'sms' })
+      .services(getServiceSid(platform))
+      .verifications.create({ to, channel: getServiceChannel(platform) })
   } catch (e) {
     return res.status(e.status).json({
       message: 'Something went wrong',
@@ -28,13 +33,13 @@ verifyRouter.get('/', async (req, res) => {
 })
 
 verifyRouter.post('/', async (req, res) => {
-  const { verificationCode: code, phoneNumber } = req.body
+  const { verificationCode: code, to, platform } = req.body
   let verificationResult
 
   try {
     verificationResult = await twilio.verify
-      .services(VERIFICATION_SID)
-      .verificationChecks.create({ code, to: phoneNumber })
+      .services(getServiceSid(platform))
+      .verificationChecks.create({ to, code })
   } catch (e) {
     return res.status(e.status).send({
       message: 'Something went wrong',
