@@ -23,7 +23,7 @@ jobs:
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: ghcr.io/b3ns44d/verify-phone
+          images: ghcr.io/b3ns44d/pvs
           tag-sha: true
           tag-edge: false
           tag-latest: true
